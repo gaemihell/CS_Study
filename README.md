@@ -9,12 +9,19 @@
 
 ## Source
 [gyoogle/tech-interview-for-developer](https://github.com/gyoogle/tech-interview-for-developer)
+
 [Songwonseok/CS-Study](https://github.com/Songwonseok/CS-Study)
+
 [기술 인터뷰 준비 자료1](https://github.com/JaeYeopHan/Interview_Question_for_Beginner)
+
 [기술 인터뷰 준비 자료2](https://github.com/WooVictory/Ready-For-Tech-Interview)
+
 [기술 인터뷰 준비 자료3](https://github.com/devham76/tech-interview-study)
+
 [기술 인터뷰 준비 자료4 - 트렐로](https://trello.com/b/BWtpfywH/신입-개발자-기술면접)
+
 [고퀄리티 개발 컨텐츠 모음](https://github.com/Integerous/goQuality-dev-contents)
+
 소스 더 있으면 계속 업데이트 하기.
 
 
