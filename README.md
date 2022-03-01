@@ -2,14 +2,12 @@
 
 준환 수연 환우의 CS 공부 기록  (2022/03/07~)
 ## Rule
----
 - 주 5일 공부(월~금)을 원칙으로 합니다.
 - 매일 공부한 것을 기록하여 23:00 이전에 `Pull Request` 를 날리는 것을 원칙으로 합니다. 기한을 어길 시 지각비 1000원을 쌓습니다. 이 금액은 나중에 회식비에 사용됩니다.
 - 매주 월요일 23:00 에 모여서 온라인 미팅을 합니다. 사정이 생겨서 얘기할 경우 다른 시간으로 변경 가능합니다.
 - 각자 공부한 주제를 강의 형식으로 발표합니다. 단, 자료 준비에 부담을 느낄 수 있으므로 공부 내용을 기록한 마크다운으로 발표하는 것으로 합니다.
 
 ## Source
----
 [gyoogle/tech-interview-for-developer](https://github.com/gyoogle/tech-interview-for-developer)
 [Songwonseok/CS-Study](https://github.com/Songwonseok/CS-Study)
 [기술 인터뷰 준비 자료1](https://github.com/JaeYeopHan/Interview_Question_for_Beginner)
@@ -21,7 +19,6 @@
 
 
 ## Topic
----
 ### 운영체제(OS)
 - 내용 추가 예정
 ### 네트워크
