@@ -12,6 +12,8 @@ application layer와 network layer의 사이에 존재하는 계층이다.
 
 application layer의 아래 계층으로, 서로 다른 호스트에서 동작하는 프로세스들 간의 `논리적 통신` 을 제공한다.
 
+또한 transport layer protocol은 network router가 아닌 end-system 에서만 사용된다.
+
 > 논리적 통신이란, application의 관점에서 보면 프로세스들이 동작하는 host들 끼리 직접 연결된 것 처럼 보인다는 것을 의미한다.
 
 <br />
@@ -41,6 +43,10 @@ receiver의 transport layer에선, network layer로부터 받은 `segment`를 �
 <br />
 
 # 어떻게 demultiplexing을 하는가?
+
+<p align="center">
+    <img src="./img/segment-format.png" width="300px">
+</p>
 
 > receiver 입장에서 보았을 때, network layer에서 받은 segment의 데이터를 어떤 socket에 넣어주어야 하는지 어떻게 알 수 있을까?
 
@@ -84,3 +90,15 @@ UDP socket은 segment header 내부에 존재하는 다음 2개의 값으로 식
 2. dst port number
 
 이것을 `connectionless demux` 라고 한다.
+
+### Web Server
+
+Web Server는 단 한개의 프로세스만을 사용한다. ~~8080 port~~
+
+그런데 어떻게 사용자마다 다른 화면, 다른 응답을 줄 수 있을까?
+
+Web Server는 각 사용자마다 thread를 생성하여 대응한다.
+
+이렇게 사용자마다 생성된(할당된) thread들이 각각의 socket 역할을 하는 것이다.
+
+그러므로 한개의 프로세스만을 사용하더라도 사용자들마다 다른 응답을 줄 수 있다.
