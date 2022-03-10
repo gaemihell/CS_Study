@@ -37,6 +37,7 @@
 - 내용 추가 예정
 ### 자료 구조
 - [우선순위 큐와 힙](DataStructure/PriorityQueue.md)
+- [B-트리](DataStructure/B-Tree.md)
 
 ### 스프링/JAVA
 - 내용 추가 예정
