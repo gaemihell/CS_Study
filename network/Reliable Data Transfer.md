@@ -92,12 +92,94 @@ rdt 3.0에선 packet loss 를 해결하기 위해 timer를 사용하여 일정 �
 
 # pipelined reliable data transfer protocol
 
-추가 예정
+앞서 여러 상황 가정을 통해 만든 rdt 3.0 프로토콜은 굉장히 완벽해보인다.
+
+하지만, rdt 3.0 프로토콜은 `stop and wait` 프로토콜 이기 때문에 성능 문제가 존재한다.
+
+이러한 성능 문제는 pipeline을 이용하여 해결할 수 있다.
+
+<p align="center">
+  <img src="./img/util-not-pipelined.png" width="150px">
+  <br />
+  pipelining이 적용되지 않은 utilization
+</p>
+
+<br />
+
+<p align="center">
+  <img src="./img/util-pipelined.png" width="400px">
+  <br />
+  rdt 3.0 프로토콜에 pipelining이 적용된 모습
+</p>
+
+위의 그림처럼 ACK를 받기전에 3개의 패킷 전송을 허용한다면, utilization이 3배가 되는 것을 볼 수 있다.
+
+이러한 기술을 `pipelining` 이라고 부르며, 앞서 발생한 성능 문제는 `pipelining`을 이용하여 해결할 수 있다는 것을 볼 수 있다.
+
+`pipelining`을 적용한 프로토콜들은 `Go-Back-N`, `Selective Repeat`, `TCP` 등의 프로토콜들이 있다.
 
 # Go-Back-N
 
-추가 예정
+<p align="center">
+  <img src="./img/go-back-n-sender.png">
+</p>
+
+`Go-Back-N` 프로토콜은 sender가 buffer를 가지며, sender가 전송할 패킷을 정한다.
+
+window size인 N의 크기만큼은 feedback 받지않고 한번에 전송할 수 있다.
+
+receiver측은 "ACK k이" "k번 패킷까지 잘 받았다." 를 의미하는 `cumulative ACK` 를 사용하여 응답한다.
+
+<p align="center">
+  <img src="./img/go-back-n-action.png">
+</p>
+
+`Go-Back-N` 프로토콜은 위의 그림처럼 패킷을 주고 받게 된다.
+
+1. 0번 패킷부터 3번 패킷까지 ACK응답이 오지않아도 한번에 보내는 것을 볼 수 있다.
+
+2. ACK 0을 응답 받았으므로, sender buffer의 `send_base`를 1번에 위치시키고, 가장 큰 번호를 가진 패킷인 4번 패킷을 전송한다.
+
+3. ACK 1을 응답 받았으므로, sender의 buffer `send_base`를 2번에 위치시키고, 가장 큰 번호를 가진 패킷인 5번 패킷을 전송한다.
+
+4. 2번 패킷이 유실되어 `timeout`이 발생하였다. N=4 이므로, 2번 패킷부터 5번패킷까지 재전송 한다.
+
+이 예시의 window size는 4로 굉장히 작기 때문에, 재전송을 할 때의 로드가 크지 않은 것처럼 보일 수 있다.
+
+그러나 실제 window size는 굉장히 크다. 따라서 패킷이 유실될 확률도 더 높고, 패킷이 유실될 때마다 window size만큼 재전송을 하게 된다면 너무 느릴것이다.
+
+`Go-Back-N` 프로토콜은 `pipelining`을 이용하여 `stop-and-wait` 프로토콜의 단점인 느린 성능을 나름 극복한 것처럼 보인다. 하지만 `Go-Back-N` 프로토콜은 패킷 하나의 오류때문에 많은 패킷들을 재전송 하는 경우가 발생한다.
 
 # Selective Repeat
 
-추가 예정
+`Selective Repeat` 프로토콜은 앞서 `pipelining`을 적용한 `Go-Back-N` 프로토콜의 재전송 문제를 유실된 패킷만 재전송하는 방식으로 해결하였다.
+
+이를 구현하기 위해선 다음과 같이 sender, receiver 둘 다 buffer를 가지고, 같은 크기의 window size를 가져야한다.
+
+<p align="center"><img src="./img/selective-repeat-buffer.png"></p>
+
+<p align="center"><img src="./img/selective-repeat-action.png"></p>
+
+### Sender
+
+`Go-Back-N` 프로토콜과 동일하게 `pipelining`을 사용하므로 window size만큼의 패킷을 응답 없이 보낼 수 있다.
+
+만약, 2번 패킷이 유실되어 receiver로부터 ACK를 받지 못하고 결국 `timeout`이 발생하였다고 가정해보자.
+
+`Go-Back-N` 프로토콜에선 2번 ~ 2+n-1번 패킷까지 재전송을 하였다
+
+반면 `Selective Repeat` 프로토콜에선 2번 패킷만을 재전송해주면 된다.
+
+**즉, ACK를 받지 못한 패킷들만 재전송 해주면 된다!**
+
+### Receiver
+
+receiver buffer의 window size 범위 안의 패킷이 전송되면 순서가 맞지 않더라도 일단 저장을 한다.
+
+만약, 2번 패킷이 유실되어 받지 못하고 계속해서 뒷 순서의 패킷을 전송받게 된다면 buffer에 다 저장을 한다.
+
+timeout이 발생하여 2번 패킷이 재전송 되어 도착한다면 ACK 2를 보내주고 buffer에 저장된 패킷들을 확인하여 전송이 완료된 곳으로 `rcv_base` 를 증가시킨다.
+
+### Dilemma
+
+[다음으로 이어집니다.](TCP.md)
