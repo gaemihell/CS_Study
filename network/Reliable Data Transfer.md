@@ -182,4 +182,12 @@ timeout이 발생하여 2번 패킷이 재전송 되어 도착한다면 ACK 2를
 
 ### Dilemma
 
+<p align="center">
+  <img src="./img/selective-repeat-dilemma.png" width="300px">
+</p>
+
+위의 그림과 같이 window size가 sequence number의 크기와 비슷하다면, 유실된 패킷이 재전송 된건지, 새로운 패킷이 온건지 알 수가 없다.
+
+이러한 문제는 sequence number의 크기를 window size 크기보다 2배이상 크게 만들면 해결할 수 있다.
+
 [다음으로 이어집니다.](TCP.md)
