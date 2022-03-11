@@ -8,9 +8,14 @@
 - 각자 공부한 주제를 강의 형식으로 발표합니다. 단, 자료 준비에 부담을 느낄 수 있으므로 공부 내용을 기록한 마크다운으로 발표하는 것으로 합니다.
 
 ### 순서
+OS -> NW -> DS -> DB
+
 |&nbsp;|정환우|유준환|이수연|
 |:---:|:---:|:---:|:---:|
-|1주차|OS|네트워크|자료 구조|
+|1주차|OS|NW|DS|
+|2주차|NW|DS|DB|
+|3주차|DS|DB|OS|
+|4주차|DB|OS|NW|
 
 ## Source
 [gyoogle/tech-interview-for-developer](https://github.com/gyoogle/tech-interview-for-developer)
@@ -36,9 +41,12 @@
 ### 네트워크
 - 내용 추가 예정
 ### 자료 구조
+
 - [우선순위 큐와 힙](DataStructure/PriorityQueue.md)
 - [B-트리](DataStructure/B-Tree.md)
 
+### 데이터베이스
+- 내용 추가 예정
 ### 스프링/JAVA
 - 내용 추가 예정
 ### 디자인 패턴
