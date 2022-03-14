@@ -11,7 +11,7 @@
 ## Scale-up 그리고 Scale-out
 
 <p align="center">
-  <img src="./img/loadbalancing-scale.jpg">
+  <img src="./img/loadbalancing-scale.png">
   <br />
   Scale-up과 Scale-out
 </p>
