@@ -27,6 +27,7 @@
   - [시간복잡도](#시간복잡도-3)
 - [퀵 정렬 (Quick Sort)](#퀵-정렬-quick-sort)
   - [동작 원리](#동작-원리-4)
+  - [특징](#특징-3)
   - [pseudo code](#pseudo-code-4)
   - [시간복잡도](#시간복잡도-4)
     - [최악의 경우](#최악의-경우-2)
@@ -343,15 +344,59 @@ merge(arr, left, mid, right) {
 
 ## 동작 원리
 
+![quick-sort](img/QuickSort.png)
+
+한 원소를 선택하여 `pivot`으로 선택한 후 `pivot`보다 작은 값들은 왼쪽 배열로, `pivot`보다 큰 값들은 오른쪽 배열로 분할한 뒤, 정렬하고 병합하면서 전체 배열이 정렬이 되는 정렬 방식이다.
+
+## 특징
+
+- `unstable` 한 정렬이다.
+- `merge sort`와 달리 비균등하게 분할한다.
+
 ## pseudo code
+
+```
+// partition 부분
+while(low <= right) {
+  // pivot보다 큰 부분을 찾는 과정
+  while(pivot > arr[low])
+    low++
+
+  // pivot보다 작은 부분을 찾는 과정
+  while(pivot < arr[high])
+    high--
+
+  if(low <= high)
+    swap(low, high)
+}
+
+swap(left, high)
+return high
+```
+
+```
+// quicksort
+if(left <= right)
+  then
+    // pivot을 기준으로 나뉨
+    pivot = partition(left, right)
+    quicksort(left, pivot-1) // 왼쪽 부분을 정렬
+    quicksort(pivot+1, right) // 오른쪽 부분을 정렬
+```
 
 ## 시간복잡도
 
 ### 최악의 경우
 
+`O(N^2)`
+
 ### 최선의 경우
 
+`O(NlogN)`
+
 ### 평균
+
+`O(NlogN)`
 
 # 힙정렬 (Heap Sort)
 
