@@ -1,5 +1,7 @@
 ## JOIN(조인)
 
+</br></br>
+
 ### 1) Join이란
 : 두개 이상의 테이블의 레코드를 그들 사이에 관련이 있는 컬럼을 기준으로 합치는 작업입니다. 
 
@@ -11,8 +13,11 @@
   - FULL (OUTER) JOIN : 
 ![](/DB/img/join.png)
 
+</br></br>
 
 이 중 가장 많이 쓰이는 두 가지 조인에 대해서 더 자세히 알아보겠습니다!
+
+</br></br></br>
 
 ### 2) Inner Join
 ![](https://www.w3schools.com/sql/img_innerjoin.gif)
@@ -22,6 +27,9 @@
 
 - table 2 : Customers
   ![](img/customer.png)
+
+  </br></br>
+
 
   두 테이블은 CustomerID를 기준으로 관계를 맺고있습니다. 만약 각 주문에 대한 주문자의 이름을 뽑아와야 한다면 inner조인으로 아래와 같은 테이블을 뽑아낼 수 있습니다.
 
@@ -36,7 +44,7 @@
 
   ![](img/inner.png)
 
-
+</br></br></br>
 
 ### 3) Left Join
 ![](https://www.w3schools.com/sql/img_leftjoin.gif)
@@ -48,6 +56,8 @@
 - table 2 : Orders
   ![](img/order.png)
 
+  </br></br>
+
   이번에는 반대로 회원을 기준으로 주문내역을 뽑아보겠습니다. 주문내역이 없는 손님들은 null이 뜹니다. 회원 중 주문을 하지 않아서 Orders테이블과 겹치는 것이 없더라도 left join이기때문에 주문을 하지 않은 회원까지 뽑아낼 수 있는 것입니다. 
 
   ```sql
@@ -57,6 +67,8 @@
     ORDER BY Customers.CustomerName;
   ```
   ![](img/outer.png)
+
+    </br></br>
 
   모든 컬럼을 출력해보면 이런식으로 겹치지 않는 값들은 Customers쪽에 컬럼만 채워지고 Order쪽 정보는 null로 채워진 것을 확인할 수 있습니다
   ![](/DB/img/outer2.png)
