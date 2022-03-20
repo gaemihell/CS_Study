@@ -7,7 +7,7 @@ B-tree는 이진트리의 확장된 개념으로 **하나의 노드가 가질 �
 
 </br></br>
 
----
+
 
 </br></br>
 
@@ -36,7 +36,7 @@ B-tree는 이진트리의 확장된 개념으로 **하나의 노드가 가질 �
 
 </br></br>
 
----
+
 </br></br>
 
 ### 3) key검색 
@@ -55,12 +55,12 @@ B-tree는 이진트리의 확장된 개념으로 **하나의 노드가 가질 �
 
 ![](https://media.vlpt.us/images/emplam27/post/e20bdef7-e106-4c89-9560-d7f57154dce1/B%ED%8A%B8%EB%A6%AC%20%EA%B2%80%EC%83%89%202.png)
 
-![](https://media.vlpt.us/images/emplam27/post/d99cdbc8-c5b4-4667-be7d-2589adca45e8/B%ED%8A%B8%EB%A6%AC%20%EC%82%BD%EC%9E%85%202-3.png)
+
 
 
 </br></br>
 
----
+
 
 </br></br>
 
@@ -83,9 +83,10 @@ B-tree는 이진트리의 확장된 개념으로 **하나의 노드가 가질 �
 
 ![](https://media.vlpt.us/images/emplam27/post/13ab96a4-04cc-42a7-bb01-eac1276bdf67/B%ED%8A%B8%EB%A6%AC%20%EC%82%BD%EC%9E%85%202-2.png)
 
+![](https://media.vlpt.us/images/emplam27/post/d99cdbc8-c5b4-4667-be7d-2589adca45e8/B%ED%8A%B8%EB%A6%AC%20%EC%82%BD%EC%9E%85%202-3.png)
 </br></br>
 
-___
+
 
 </br>
 
