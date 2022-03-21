@@ -39,7 +39,7 @@ OS -> NW -> DS -> DB
 ### 운영체제(OS)
 - 내용 추가 예정
 ### 네트워크
-- 내용 추가 예정
+- Reliable Data Trnasfer
 ### 자료 구조
 - [우선순위 큐와 힙](DataStructure/PriorityQueue.md)
 - [B-트리](DataStructure/B-Tree.md)
