@@ -14,8 +14,10 @@ OS -> NW -> DS -> DB
 |:---:|:---:|:---:|:---:|
 |1주차|OS|NW|DS|
 |2주차|NW|DS|DB|
-|3주차|DS|DB|OS|
+|**3주차**|DS|DB|OS|
 |4주차|DB|OS|NW|
+|5주차|OS|NW|DS|
+|6주차|NW|DS|DB|
 
 ## Source
 [gyoogle/tech-interview-for-developer](https://github.com/gyoogle/tech-interview-for-developer)
