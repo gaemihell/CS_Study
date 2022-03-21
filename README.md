@@ -39,11 +39,11 @@ OS -> NW -> DS -> DB
 ### 운영체제(OS)
 - 내용 추가 예정
 ### 네트워크
-- [Transport Layer](network/Transport Layer.md)
-- [Reliable Data Transfer](network/Reliable Data Transfer.md)
+- [Transport Layer](network/Transport%20Layer.md)
+- [Reliable Data Transfer](network/Reliable%20Data%20Transfer.md)
 - [TCP](network/TCP.md)
 - [Http and Https](network/HTTP&HTTPS.md)
-- [Load Balancing](network/Load Balancing.md)
+- [Load Balancing](network/Load%20Balancing.md)
 
 ### 자료 구조
 - [우선순위 큐와 힙](DataStructure/PriorityQueue.md)
