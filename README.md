@@ -48,6 +48,9 @@ OS -> NW -> DS -> DB
 ### 자료 구조
 - [우선순위 큐와 힙](DataStructure/PriorityQueue.md)
 - [B-트리](DataStructure/B-Tree.md)
+- [배열과 연결리스트](DataStructure/Array%20and%20LinkedList.md)
+- [정렬](DataStruecture/Sotring.md)
+
 ### 데이터베이스
 - 내용 추가 예정
 ### 스프링/JAVA
