@@ -3,7 +3,7 @@
 HTTP와 HTTPS 가 무엇이고 차이가 무엇인지 알아봅시다.
 
 <p align="center">
-  <img src="./img/HTTP&HTTPS.png">
+  <img src="./img/httpnhttps.png">
   <br  />
   HTTP와 HTTPS
 </p>
