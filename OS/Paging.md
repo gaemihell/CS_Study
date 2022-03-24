@@ -16,7 +16,7 @@
 
 
 - CPU
-![](https://t1.daumcdn.net/cfile/tistory/2346B74E5919A26716)
+- ![](https://t1.daumcdn.net/cfile/tistory/2346B74E5919A26716)
 
 
 </br></br>
@@ -61,7 +61,8 @@
 - modify bit(dirty) : store옵션이 일어났는지
 - reference bit : 접근된적이 있는지 여부
 - protections bits : 권한 제한 (read, write..)
-- 
+  
+  
 </br></br></br>
 
 #### 3. Page Fault
