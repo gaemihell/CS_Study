@@ -31,9 +31,21 @@
 </br></br>
 
 #### 2. Memory Management Concepts
-- Address Space : 프로세스마다 주소공간을 확보
-  - Physical address space : main memory(DRAM)의 주소공간 -> 하드웨어가 결정
-  - Logical/Virtual address space : 프로세스(프로그램)가 사용하는 주소공간(32bits, 64bits)
+  
+  (1) Physical address space
+  - main memory(DRAM)의 주소공간 -> 하드웨어가 결정
+  - frame : 물리주소공간을 4K 단위로 나눈 블록 
+  
+  (2) Logical/Virtual address space 
+  - 프로세스(프로그램)가 사용하는 주소공간(32bits, 64bits) (실제로 존재하는 메모리는 아님)
+  - page : 가상주소공간 4G를 4096byte(4K) 단위로 나눈 하나의 메모리 블록
+
+(3) 특징
+- 하나의 프로세스의 logical memory가 physical memory보다 커질 수 있다
+- 여러 프로세스의 logical memroy합이 physical memory보다 커질 수 있다
+  - 필요한 부분만 main memory로 올리는 기법 : Demand-paging
+- Disk공간은 main memory에서 담지못한 데이터를 기록하고 있으며 모든 프로세스가 사용한다. 
+  - 엄청 작업을 많이하면 disk <-> main memory인 작업이 활발하게 일어난다, 사용자는 로컬메모리마냥 사용할 수 있다. ( 4GB 램 + 4GB 페이징 파일 = 마치 8GB 램)
 
 > virtual address는 하드웨어를 통해 Physical address로 변경되어 매핑된다
 
