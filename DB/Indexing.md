@@ -4,7 +4,7 @@
 
 ## Index
 
-데이터베이스의 테이블의 검색속도를 향상 시키기 위한 자료구조
+데이터베이스의 테이블의 검색속도를 향상 시키기 위한 자료구조이다.
 
 ## Search Key
 
@@ -209,9 +209,34 @@ leaf node끼리 연결되어있기 때문에 `sequential access`가 가능하기
 
 ![b+tree-non-leaf-nodes](img/b%2Btree-non-leaf-nodes.png)
 
-## 정리
+- 비 단말 노드들은 multi-level sparse index를 구성한다.
+
+* B Tree와는 달리 데이터의 위치 또는 데이터를 갖고있지 않다.
 
 # QnA
+
+- 인덱스란?
+
+  데이터베이스의 테이블의 검색속도를 향상 시키기 위한 자료구조이다.
+
+- 왜 B+ Tree를 사용하는가?
+
+  1. 인덱스를 트리구조로 만들었을 때, 데이터의 탐색, 삽입, 삭제 등의 작업들이 트리의 높이에 비례한다. 이 때, 트리의 최대높이를 최소화 시키려면 `balanced` 되어야 하기 때문에 `balanced` 트리 자료구조를 선택해야 한다.
+
+  2. 다른 `balanced` 트리와는 달리 B+ Tree는 한 노드에 많은 데이터를 가질 수 있다. 또한, 트리의 높이가 이진트리에 비해 낮다.
+
+- B+ Tree와 B Tree의 차이점?
+
+  - B Tree  
+    단말노드가 아니어도, search key와 그 search key에 대응하는 data를 가지고 있다.
+
+  - B+ Tree  
+    단말노드에만 `data`를 가지고, 비단말노드에는 search key만을 갖고있다.
+
+* 인덱스 구조의 단점?
+
+  1. 추가적인 공간이 필요하다.
+  2. 삽입, 삭제에 overhead가 있다.
 
 # Reference
 
