@@ -58,6 +58,57 @@
   <br/> 'car' 삽입 후
 </p>
 
+### Python Code
+
+카카오 코딩테스트 문제에 트라이를 이용해서 효율성 테스트를 통과해야 하는 문제가 있다.
+
+이외에도 카카오는 문자열 다루는 문제를 정말 많이 내므로 트라이를 잘 알아둘 필요가 있다.
+
+```python
+
+# 문제에 맞춰서 구현한거라 100% 정확한 코드는 아니다.
+# insert, serach 부분만 보면 될 것.
+
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.children = {}  # 아래 노드들 연결
+        self.count = 0 # 이 다음에 와일드 카드가 올 것을 대비해 여기 아래로 단어가 몇개 있는지 확인.
+
+class Trie:
+    def __init__(self):
+        self.head = Node(None)
+        self.count = 0
+
+    def insert(self, string):
+        current_node = self.head
+        for char in string:
+            current_node.count += 1
+            if char not in current_node.children:   # abc가 들어왔을때, b가 child에 없으면 b를 아래에 넣는 것.
+                current_node.children[char] = Node(char)
+            current_node = current_node.children[char]
+
+    def isIn(self, string):
+        current_node = self.head
+        for char in string:
+            if char not in current_node.children:
+                return False
+            current_node = current_node.children[char]
+        return True
+
+    def search(self, string):   # 있다는 걸 전제로 찾는다.
+        current_node = self.head
+        for char in string:
+            current_node = current_node.children[char]
+        return current_node.count
+
+    def total(self):    # 이 길이의 트라이 총 문자열 개수
+        current_node = self.head
+        for key in current_node.children:
+            print(key)
+            self.count += current_node.children[key].count
+```
+
 ## 시간 복잡도
 
 제일 긴 문자열의 길이를 `L`, 문자열들의 수를 `N`이라 가정한다.

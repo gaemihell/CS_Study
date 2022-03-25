@@ -9,12 +9,12 @@
 
 cf) `트리(Tree)`는 사이클을 가질 수 없는 `Directed Graph`이다.
 
-### Undirected Graph
-
 <p align="center">
   <img src="./img/directed_graph.png">
   <br/> Directed Graph
 </p>
+
+### Undirected Graph
 
 - 말 그대로 정점과 간선의 연결관계에 있어서 방향성이 없는 그래프를 `Undirected Graph` 라 한다.
 - 간선을 통해서 양방향으로 갈 수 있다.
@@ -134,11 +134,91 @@ ex) N개의 도시가 존재하는 상황에서 도시 A,B를 선택했을 때, 
 
 이런 경우에 최소 비용으로 만들 수 있는 신장 트리를 구해야 하고, 이를 구하는 알고리즘을 최소 신장 트리 알고리즘 이라고 한다.(MST)
 
-MST를 구하는 대표적인 알고리즘 두 개를 알아볼 것인데, 알아보기 전에 `Union-find Algorithm`을 알아야 한다.
+MST를 구하는 대표적인 알고리즘 두 개를 알아볼 것인데, 알아보기 전에 `Union-find 자료구조`에 대해 알아야 한다.
 
-### Union-find Alogrithm
+### Union-find 자료구조
 
 - 서로소 부분 집합들로 나누어진 원소들의 데이터를 처리하기 위한 자료구조
+- 집합을 하나로 합치는 `Union` 연산과 특정 원소가 속한 집합이 어떤 집합인지 알려주는 `Find` 연산으로 조작한다.
+- 트리를 이용하여 집합을 표현한다.
+
+알고리즘은 다음과 같다.
+
+1. 두 노드 A,B로 `Union` 연산을 한다. 이 때, 서로 연결된 두 노드 A,B를 확인한다.
+   - A, B의 루트 노드 rootA, rootB를 각각 찾는다. 이때 루트가 같다면 연결할 필요가 없다.
+   - rootA를 rootB의 부모 노드로 설정한다. (rootB가 root를 가리키도록 한다.)
+2. 모든 `Union` 연산을 처리할 때까지 1번 과정을 반복한다.
+
+그림으로 보면 다음과 같다.
+
+<p align="center">
+  <img src="./img/union_find01.png">
+  <br/> (1,4) 두 노드 연결 전
+</p>
+
+<p align="center">
+  <img src="./img/union_find02.png">
+  <br/> 두 노드 연결 후
+</p>
+
+**Python 코드**
+
+1. 개선 전 코드
+
+```python
+def find_parent(parent, x):
+  if parent[x] != x:
+    return find_parent(parent, parent[x])
+
+  return x
+
+def union_parent(parent, a, b):
+  a = find_parent(parent, a)
+  b = find_parent(parent, b)
+  if a < b:
+    parent[b] = a # b가 a를 부모노드로 가리킨다.
+  else:
+    parent[a] = b
+```
+
+이렇게 코드르 짜게되면, `1<-2<-3<-4<-5` 이런 식으로 노드가 연결이 되어 있을 때, 5번 노드의 부모를 찾기 위해서 5 -> 4 -> 3 -> 2 -> 1 다 한번씩 들러야 하게 되고, 노드의 개수가 V개 일때 최악의 경우 `O(V)` 의 시간 복잡도를 가질 수 있다.
+
+따라서 간단하게 개선해보자.
+
+2. 개선 된 코드
+
+```python
+def find_parent(parent, x):
+  if parent[x] != x:
+    return find_parent(parent, parent[x])
+
+  return parent[x]  # *** 이 부분이 변경 되었다. ***
+
+def union_parent(parent, a, b):
+  a = find_parent(parent, a)
+  b = find_parent(parent, b)
+  if a < b:
+    parent[b] = a # b가 a를 부모노드로 가리킨다.
+  else:
+    parent[a] = b
+```
+
+**Union Find 자료구조의 시간 복잡도**
+
+노드의 개수가 V개이고, 최대 V-1개의 Union연산과 M개의 find연산이 가능 할 때 시간복잡도는
+
+$$O(V + M(1 + \log_{2-M/V}V))$$
+
+증명 과정은 책에서도 생략했다. 그냥 이렇다고만 알면 될 것 같다. 노드 개수가 1000개 이하면 1000만 번 가량의 연산이 소요 된다 정도로.
+
+그렇다면 이 알고리즘이 왜 필요할까? --> 바로 사이클을 판별하기 위해서다.
+
+1. 각 간선을 확인하며 루트 노드를 확인한다.
+   - 루트 노드가 서로 다르다면 `union` 연산을 한다.
+   - 같다면 사이클이 발생한 것!
+2. 모든 간선에 대하여 1번 과정을 수행한다.
+
+이 개념이 크루스칼 알고리즘에 사용되는 것이다.
 
 ## MST를 구하기 위한 알고리즘
 
@@ -158,6 +238,8 @@ MST를 구하는 대표적인 알고리즘 두 개를 알아볼 것인데, 알�
 
 3. 모든 간선에 대하여 2번의 과정을 반복한다.
 
+그러니까 오름차순으로 정렬하고, 간선 하나씩 확인하면서 `union-find 자료구조` 를 이용하면 되는 것이다.
+
 그림으로 살펴 보자.
 
 <p align="center">
@@ -165,6 +247,41 @@ MST를 구하는 대표적인 알고리즘 두 개를 알아볼 것인데, 알�
   <br/> 크루스칼 알고리즘의 진행 과정
 </p>
 
+간단하게 흐름만 코드로 나타내보자.
+
+**Python Code**
+
+```python
+# Union-Find 코드는 위에 잘 설명되어 있으므로 생략
+
+a,b,cost = map(int,input().split()) # a, b 노드를 연결하는 간선의 비용 cost
+edges.append(cost,a,b)
+
+edges.sort()  # 간선의 비용을 오름차순으로 정렬
+
+total_cost = 0
+
+# 간선을 확인하면서, 사이클을 만들지 않으면 집합을 만들고 비용을 더한다.
+for edge in edges:
+  cost, a, b = edge
+if find_parent(parent,a) != find_parent(parent,b):
+  union_parent(parent,a,b)
+  total_cost += cost
+```
+
+**시간 복잡도**
+
+- 간선의 개수가 E개일 때, `O(ElogE)` 의 시간 복잡도를 가진다.
+- `이유?` : 비용을 오름차순으로 정렬할 때 `O(ElogE)`의 시간복잡도를 갖는데, `union-find 자료구조`의 시간복잡도는 그보다 작기 때문에 무시한다.
+
+### 위상 정렬(Topology Sort)
+
+- 방향 그래프의 모든 노드를 방향성에 거스르지 않도록 순서대로 나열하는 것
+
 ## Reference
 
+동빈북 ( 이것이 코딩테스트다 with Python 나동빈 저 )
+
 [그래프란](https://gmlwjd9405.github.io/2018/08/13/data-structure-graph.html)
+
+[유니온 파인드](<https://ip99202.github.io/posts/유니온-파인드(Union-Find)/>)
