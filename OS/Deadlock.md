@@ -75,13 +75,35 @@ Deadlock Prevention은 발생조건 4가지 중 한 가지를 발생하지 않�
   그러나 이 방식은 각 프로세스가 어떤 자원들을 필요로 하는지를 알아야 수행할 수 있다.
 
 - 자원 할당 거부
-  - banker's algorithm
+  - [banker's algorithm](https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/)
 
 # Deadlock detection
 
-- Deadlock 발견 알고리즘
+![deadlock-detection](img/deadlock-detection.png)
 
-- Deadlock 회복 알고리즘
+위 그림에서 Available vector를 W라고 하자.
+
+W로 request를 해결할 수 있는건 _P3_ 이다.
+
+*P3*을 해결하고 나선, P1, P2, P4 의 요청들을 전부 해결할 수 없다.
+
+이 때, P4는 자원을 갖고있지 않으므로, P4때문에 데드락이 발생하진 않는다.
+
+따라서 P1, P2가 데드락을 발생시킬 것이다.
+
+# Deadlock recovery
+
+보통 다음 방식들 중 하나를 택한다.
+
+- 모든 데드락이 발생한 프로세스들을 중단한다.
+
+  - OS에 의해 채택되는 가장 흔한 해결 방식이다.
+
+- 데드락이 발생하기 전 각 프로세스에 저장해둔 체크포인트로 백업하고 다시 실행한다.
+
+* 데드락이 발생하지 않을때까지 프로세스들을 하나씩 중단한다.
+
+* 데드락이 발생하지 않을때까지 자원들을 하나씩 빼앗는다.
 
 # Dining Philosophers problem
 
@@ -186,3 +208,5 @@ void philosopher[k=0 to 4] {
 https://ko.wikipedia.org/wiki/%EA%B5%90%EC%B0%A9_%EC%83%81%ED%83%9C
 
 Operating Systems Internals and Design Principles 8th, William Stallings
+
+https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/
