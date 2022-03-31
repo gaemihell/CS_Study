@@ -75,7 +75,12 @@ Deadlock Prevention은 발생조건 4가지 중 한 가지를 발생하지 않�
   그러나 이 방식은 각 프로세스가 어떤 자원들을 필요로 하는지를 알아야 수행할 수 있다.
 
 - 자원 할당 거부
+
   - [banker's algorithm](https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/)
+
+    banker's algorithm을 실행하여, `safe state` 라면 데드락이 절대 발생하지 않는다.
+
+    반면 `unsafe state`라면 데드락이 발생할 `가능성`이 있다.
 
 # Deadlock detection
 
@@ -107,6 +112,20 @@ W로 request를 해결할 수 있는건 _P3_ 이다.
 
 # Dining Philosophers problem
 
+<p align="center">
+  <img src="img/philisophers.png" width="300px">
+</p>
+
+철학자들은 세가지의 행동을 한다.
+
+1. 생각하기
+2. 배고파잉
+3. 먹기
+
+스파게티를 먹으려면 2개의 포크를 사용해야 하는데, 동시에 2개의 포크는 사용할 수 없다. (Mutual Exclusion)
+
+`starvation`과 `deadlock`을 막으려면 어떻게 해야할까?
+
 - 세마포어를 이용한 해결 방법
 
 ```cpp
@@ -118,12 +137,11 @@ int i;
 void philosopher(int i) {
     while(1) {
         think();
-        wait(fork[i]);
-        wait(fork[(i+1)%5]);
-        eat();
-        signal(fork[(i+1)%5j]);
-        signal(fork[i]);
-    }
+        wait(fork[i]); // 왼쪽 포크 잡기
+        wait(fork[(i+1)%5]); // 오른쪽 포크 잡기
+        eat(); // 포크가 2개니깐 식사 가능!
+        signal(fork[(i+1)%5j]); // 오른쪽 포크 놓기
+        signal(fork[i]); // 왼쪽 포크 놓기
 }
 
 int main() {
@@ -133,7 +151,7 @@ int main() {
 
 ```cpp
 
-/* 첫번째 방법 */
+/* 두번째 방법 */
 
 semaphore fork[5] = {1};
 semaphore room = {4};
@@ -141,12 +159,12 @@ int i;
 void philosopher(int i) {
     while(1) {
         think();
-        wait(room);
-        wait(fork[i]);
-        wait(fork[(i+1)%5]);
+        wait(room); // 방 안에있는 사람들만 포크를 잡을 수 있다
+        wait(fork[i]); // left
+        wait(fork[(i+1)%5]); // right
         eat();
-        signal(fork[(i+1)%5]);
-        signal(fork[i]);
+        signal(fork[(i+1)%5]); // right
+        signal(fork[i]); // left
         signal(room);
     }
 }
