@@ -50,6 +50,8 @@ OS -> NW -> DS -> DB
 - [페이징(Paging)](OS/Paging.md)
 - [스와핑(Swapping)](OS/Swapping.md)
 - [메모리 추상화(Memory Abstraction)](OS/MemoryAbstraction.md)
+- [데드락(Deadlock)](OS/Deadlock.md)
+- [캐시(Cache)](OS/Cache.md)
 
 ### 네트워크
 
@@ -58,6 +60,8 @@ OS -> NW -> DS -> DB
 - [TCP](network/TCP.md)
 - [Http and Https](network/HTTP&HTTPS.md)
 - [Load Balancing](network/Load%20Balancing.md)
+- [쿠키와 세션](network/cookie%26session.md)
+- [프로토콜](network/Protocol.md)
 
 ### 자료 구조
 
@@ -75,6 +79,8 @@ OS -> NW -> DS -> DB
 - [SQL](DB/sql.md)
 - [인덱싱](DB/Indexing.md)
 - [해싱](DB/Hashing.md)
+- [Transaction Isolation Level](DB/Transaction%20Isolation%20Level.md)
+- [트랜젝션](DB/Transaction.md)
 
 ### 스프링/JAVA
 
