@@ -58,11 +58,30 @@
     - sequence number기반의 오류제어방식(순서 역전 방지, 중복 패킷 방지..)
     - 포트(port)번호로 응용프로그램 구분 
 
+  - 세션 계층(Session Layer)
+
+  - 표현 계층(Presentation Layer) 
+
+  - 응용 계층(Application Layer)
+    - HTTP, FTP, SMTP, POP3, IMAP, Telnet 등과 같은 프로토콜이 있음
+    - 통신패킷들은 해당 프로토콜에 의해 처리 
+    - 우리가 사용하는 응용프로그램(브라우저, 메일..)은 위의 프로토콜을 쉽게 사용하게 해주는 것
+
 
 
 </br></br></br>
 
 ### 4. 프로토콜의 기능 
+- 단편화(Fragmentation)와 재합성(Assembly)
+- 캡슐화(Encapsulation)
+- 연결 제어(Connection Control)
+- 흐름 제어(Flow Control)
+- 오류 제어(Error Control)
+- 순서 결정(Seuencing)
+- 주소 설정(Addressing
+- 다중화(Multiplexing)
+- 전송 서비스(Transmission Service)
+  
 
 
 
