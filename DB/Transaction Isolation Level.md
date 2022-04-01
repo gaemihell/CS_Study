@@ -54,6 +54,49 @@
 
 이런 문제가 발생할 수 있기 때문에 격리 수준에 의해 실행되는 SQL 문장이 어떤 결과를 출력할 지 정확히 예측하고 사용해야 한다.
 
+## Repeatable Read
+
+- 트랜잭션이 완료될 때까지 SELECT 문장이 사용되는 모든 데이터에 Shared Lock이 걸리는 계층
+- 다른 사용자는 트랜잭션 영역에 해당되는 데이터에 대한 수정 불가능
+- MySQL에서는 트랜잭션마다 ID를 부여하여 그보다 작은 트랜잭션 번호에서 변경한 것만 읽게 된다.
+- Undo 공간에 백업해두고 실제 레코드 값을 변경한다.
+  - 백업된 데이터는 불필요하다고 판단되는 시점에 삭제한다.
+  - 백업된 레코드가 많아지면 성능이 떨어질 수 있다.
+- Non-Repeatable Read 부정합이 발생하지 않는다.
+
+<p align="center">
+  <img src="./img/repeatable_read.png">
+  <br/> Repeatable Read
+</p>
+
+그렇다면 이 방식은 문제가 없을까??
+-> 아니다. `Phantom Read` 발생
+
+### Phantom Read란?
+
+- 다른 트랜잭션에서 수행한 변경 작업에 의해 레코드가 보였다가 안보였다 하는 현상.
+- 이를 방지하기 위해서는 쓰기 잠금을 걸어야 한다.
+
+<p align="center">
+  <img src="./img/phantom_read.png">
+  <br/> Phantom Read
+</p>
+
+## Serializable
+
+- 트랜잭션이 완료될 때까지 SELECT 문장이 사용되는 모든 데이터에 Shared Lock이 걸리는 계층
+- 가장 엄격한 격리 수준. 완벽한 읽기 일관성 모드를 제공한다.
+- 다른 사용자는 트랜잭션 영역에 해당되는 데이터에 대한 수정 및 입력 불가능
+- 성능적으로 동시 처리성능이 가장 낮으며, Phantom Read가 발새앟지 않지만 거의 사용되지 않는다.
+
+## 정리
+
+- Isolation level 선택시 고려사항 : 동시성과 데이터 무결성
+- 레벨을 높게 조정할 수록 비용이 증가한다.
+- 동시성과 데이터 무결성은 반비례한다.
+- 무결성이란? **데이터의 정확성, 일관성, 유효성이 유지되는 것!**
+- 낮은 단계 Isolation Level을 활용했을 때 발생할 수 있는 문제들 : `Dirty Read`, `Non-Repeatable Read`, `Phantom Read`
+
 # Reference
 
 [Neseoy Blog](https://nesoy.github.io/articles/2019-05/Database-Transaction-isolation)
