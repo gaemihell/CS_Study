@@ -82,3 +82,39 @@ TCP 연결을 더 이상 사용하지 않아 종료하고 싶을땐 `4-way hands
 `server`의 `FIN`을 받자마자 종료해버리면, 이 재전송된 패킷은 drop되고 데이터도 영원히 유실될 것이다.
 
 따라서 일정시간동안 기다린 뒤, 완전히 연결을 종료한다.
+
+# TCP Congestion Control
+
+TCP는 패킷이 유실되면 재전송을 하기 때문에 경우에 따라 네트워크의 부하가 심해질 수 있다.  
+그러므로 네트워크의 상태를 유추하여 속도를 조절해야 한다. (직접적인 피드백 X)
+
+![tcp-congestion-control](img/tcp-congestion-control.png)
+
+### 1. Congwin
+
+Congest Window의 약자로, ACK를 확인하지 않고 한번에 보낼 수 있는 세그먼트의 갯수를 뜻한다.  
+예를 들어, CongWin = 7 일 경우 7개의 세그먼트를 보내고, ACK를 확인한다.
+
+### 2. treshold
+
+CongWin의 크기의 증가를 좌우하는 변수이다. 만약 CongWin의 크기가 Treshold보다 작을 경우, 지수적으로 증가하고 클 경우 선형적으로 증가한다.
+
+# 3 Main Phases
+
+위의 그림을 보면 세가지의 단계가 나누어져있는 것을 확인할 수 있다.
+
+1. Slow Start : CongWin <= Treshold 의 상태. Congwin의 크기는 지수적으로 증가 !
+2. Additive increase : CongWin > Treshold의 상태. CongWin의 크기는 선형적으로 증가 !
+3. Multiplicative decrase : Packet Loss가 발생하여 감소. 감소하는 값과 감소하는 양은 프로토콜에 따라 다르다.
+
+# TCP Tahoe and Reno
+
+TCP Tahoe와 TCP Reno는 treshold 전까지 CongWin의 크기가 지수적 증가를 하고, 이후엔 선형적 증가를 하는 것은 동일하다.
+
+두 프로토콜은 패킷 손실이 감지되었을 때의 동작 방식이 다르다.
+
+## TCP Tahoe
+
+## TCP Reno
+
+# TCP Flow Control
