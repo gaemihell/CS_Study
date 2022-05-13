@@ -401,17 +401,68 @@ if(left <= right)
 # 힙정렬 (Heap Sort)
 
 ## 동작 원리
+- 최대힙(최소힙)을 만든다  
+  ex) [3,6,4,8,9,7]  
+  
+  ![](img/heapsort1.png)
+  맨 끝에 넣어준 뒤에 재구성 
 
+- root부터 하나씩 뽑아내기  
+  ![](img/heapsort2.png)
+  root와 맨끝을 바꾸고 root로 간 숫자를 재구성 
+  
 ## pseudo code
+```java
 
+public class Heap {
+  private int[] a; // 배열 
+  private int n;  // 배열 길이 + 1
+  private int count; 
+ 
+  public Heap(int capacity) {
+    a = new int[capacity + 1];
+    n = capacity;
+    count = 0;
+  }
+  // 맨밑에서 바로 위 레벨부터 
+  private static void buildHeap(int[] a, int n) {
+    for (int i = n/2; i >= 1; --i) {
+      heapify(a, n, i);
+    }
+  }
+  
+  // 최대힙정렬 
+  private static void heapify(int[] a, int n, int i) {
+    while (true) {
+      int maxPos = i;
+      if (i*2 <= n && a[i] < a[i*2]) maxPos = i*2;
+      if (i*2+1 <= n && a[maxPos] < a[i*2+1]) maxPos = i*2+1;
+      if (maxPos == i) break;
+      swap(a, i, maxPos);
+      i = maxPos;
+    }
+  }  
+  
+  // 루트부터 빼내기 
+  public static void sort(int[] a, int n) {
+    buildHeap(a, n);
+    int k = n;
+    while (k > 1) {
+      swap(a, 1, k);
+      --k;
+      heapify(a, k, 1);
+    }
+  }
+}
+```
 ## 시간복잡도
 
 ### 최악의 경우
-
+`O(NlogN)`
 ### 최선의 경우
-
+`O(NlogN)`
 ### 평균
-
+`O(NlogN)`
 # 기수정렬 (Radix Sort)
 
 ## 동작 원리
