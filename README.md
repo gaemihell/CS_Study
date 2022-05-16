@@ -52,6 +52,8 @@ OS -> NW -> DS -> DB
 - [메모리 추상화(Memory Abstraction)](OS/MemoryAbstraction.md)
 - [데드락(Deadlock)](OS/Deadlock.md)
 - [캐시(Cache)](OS/Cache.md)
+- [CPU 스케줄링](OS/Scheduling.md)
+- [Sync, Async, Blocking, NonBlocking](OS/Sync%20and%20Async.md)
 
 ### 네트워크
 
