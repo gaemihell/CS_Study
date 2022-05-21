@@ -1,6 +1,6 @@
 # CS Study
 
-준환 수연 환우의 CS 공부 기록 (2022/03/07)
+준환 수연 환우의 CS 공부 기록 (2022/03/07 ~ )
 
 ## Rule
 
@@ -20,7 +20,10 @@ OS -> NW -> DS -> DB
 | 3주차  |   DS   |   DB   |   OS   |
 | 4주차  |   DB   |   OS   |   NW   |
 | 5주차  |   OS   |   NW   |   DS   |
-| 6주차  |   NW   |   DS   |   DB   |
+| 7주차  |   NW   |   DS   |   DB   |
+| 8주차  |   DS   |   DB   |   OS   |
+| 9주차  |   DB   |   DS   |   NW   |
+| 10주차 |   OS   |   NW   |   DS   |
 
 ## Source
 
