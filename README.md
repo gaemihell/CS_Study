@@ -60,10 +60,15 @@ OS -> NW -> DS -> DB
 - [Transport Layer](network/Transport%20Layer.md)
 - [Reliable Data Transfer](network/Reliable%20Data%20Transfer.md)
 - [TCP](network/TCP.md)
+- [TCP 혼잡제어](network/TCP_Congestion_Control.md)
+- [TCP 흐름제어](network/TCP_Flow_Control.md)
 - [Http and Https](network/HTTP&HTTPS.md)
+- [HTTP 변화 과정](network/Histroy%20of%20HTTP.md)
 - [Load Balancing](network/Load%20Balancing.md)
 - [쿠키와 세션](network/cookie%26session.md)
 - [프로토콜](network/Protocol.md)
+- [TLS Handshake](network/TLS%20Handshake.md)
+- [CSRF&XSS](network/CSRF%26XSS.md)
 
 ### 자료 구조
 
@@ -83,10 +88,12 @@ OS -> NW -> DS -> DB
 - [해싱](DB/Hashing.md)
 - [Transaction Isolation Level](DB/Transaction%20Isolation%20Level.md)
 - [트랜젝션](DB/Transaction.md)
+- [Redis](DB/Redis.md)
+- [정규화](DB/Normalization.md)
 
 ### 스프링/JAVA
 
-- 내용 추가 예정
+- [DI, IoC](Spring/DI%2C%20IoC.md)
 
 ### 디자인 패턴
 
